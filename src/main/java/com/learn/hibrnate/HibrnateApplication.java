@@ -9,12 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.learn.hibrnate.entity.Course;
 import com.learn.hibrnate.repository.CourseRepository;
+import com.learn.hibrnate.repository.StudentRepository;
 
 @SpringBootApplication
 public class HibrnateApplication implements CommandLineRunner {
 
 	@Autowired
 	CourseRepository repository;
+	
+	@Autowired
+	private StudentRepository studentRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -24,8 +28,8 @@ public class HibrnateApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Course course = repository.findById(10001L);
-		logger.info("Course 10001 -> {}", course);
+		//repository.playWithEntityManager();
+		studentRepository.saveStudentWithPassport();
 
 	}
 
