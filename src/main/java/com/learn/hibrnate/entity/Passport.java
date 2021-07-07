@@ -19,6 +19,18 @@ public class Passport {
 
 	protected Passport() {
 	}
+	
+	//for bi-directional
+	@OneToOne(fetch = FetchType.LAZY,mappedBy = "passport")
+	Student student;
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
 
 	public Passport(String number) {
 		this.number = number;

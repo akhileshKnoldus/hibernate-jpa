@@ -17,6 +17,7 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	
+	//by default 1to1 is Egger 
 	@OneToOne(fetch=FetchType.LAZY)
 	private Passport passport;
 

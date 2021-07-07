@@ -29,7 +29,7 @@ public class HibrnateApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//repository.playWithEntityManager();
-		studentRepository.saveStudentWithPassport();
+		//studentRepository.saveStudentWithPassport();
 
 	}
 
