@@ -30,6 +30,7 @@ public class HibrnateApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//repository.playWithEntityManager();
 		//studentRepository.saveStudentWithPassport();
+		repository.addReviewsForCourse();
 
 	}
 
