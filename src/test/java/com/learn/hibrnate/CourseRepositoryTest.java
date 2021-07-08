@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.learn.hibrnate.entity.Course;
+import com.learn.hibrnate.entity.Review;
 import com.learn.hibrnate.repository.CourseRepository;
 
 
@@ -56,11 +58,20 @@ public class CourseRepositoryTest {
 	@Test
 	@DirtiesContext
 	public void playWithEntityManager() {
-		//repository.playWithEntityManager();
+		repository.playWithEntityManager();
 	}
 	
 	@Test
-	public void findByQuery_basic() {
-		//em.createQuery("select c form Course c");
+	@Transactional
+	public void retrieveReviewsForCourse() {
+		Course course = repository.findById(10001L);
+		logger.info("{}",course.getReviews());
+	}
+
+	@Test
+	@Transactional
+	public void retrieveCourseForReview() {
+		Review review = em.find(Review.class, 50001L);
+		logger.info("{}",review.getCourse());
 	}
 }

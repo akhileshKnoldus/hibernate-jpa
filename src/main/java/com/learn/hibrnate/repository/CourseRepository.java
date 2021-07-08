@@ -1,5 +1,7 @@
 package com.learn.hibrnate.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
@@ -15,8 +17,8 @@ import com.learn.hibrnate.entity.Review;
 @Transactional
 public class CourseRepository {
 	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	EntityManager em;
 
@@ -24,18 +26,22 @@ public class CourseRepository {
 		return em.find(Course.class, id);
 	}
 
-	public void deleteById(Long id) {
-		Course course= em.find(Course.class, id);
-		 em.remove(course);
+	public Course save(Course course) {
+
+		if (course.getId() == null) {
+			em.persist(course);
+		} else {
+			em.merge(course);
+		}
+
+		return course;
 	}
 
-	public void save(Course course) {
-		if (course.getId() == null)
-			em.persist(course);
-		else
-			em.merge(course);
+	public void deleteById(Long id) {
+		Course course = findById(id);
+		em.remove(course);
 	}
-	
+
 	public void playWithEntityManager() {
 		Course course1 = new Course("Web Services in 100 Steps");
 		em.persist(course1);
@@ -46,7 +52,7 @@ public class CourseRepository {
 		
 	}
 
-	public void addReviewsForCourse() {
+	public void addHardcodedReviewsForCourse() {
 		//get the course 10003
 		Course course = findById(10003L);
 		logger.info("course.getReviews() -> {}", course.getReviews());
@@ -66,5 +72,16 @@ public class CourseRepository {
 		em.persist(review1);
 		em.persist(review2);
 	}
-
+	
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {		
+		Course course = findById(courseId);
+		logger.info("course.getReviews() -> {}", course.getReviews());
+		for(Review review:reviews)
+		{			
+			//setting the relationship
+			course.addReview(review);
+			review.setCourse(course);
+			em.persist(review);
+		}
+	}
 }
