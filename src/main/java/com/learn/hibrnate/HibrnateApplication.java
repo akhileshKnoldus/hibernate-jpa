@@ -62,7 +62,8 @@ public class HibrnateApplication implements CommandLineRunner {
 				employeeRepository.retrieveAllFullTimeEmployees());
 		
 		logger.info("Part Time Employees -> {}", 
-				employeeRepository.retrieveAllPartTimeEmployees());*/
+				employeeRepository.retrieveAllPartTimeEmployees());
+		*/
 	}
 
 }
