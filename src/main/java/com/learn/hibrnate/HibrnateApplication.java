@@ -1,5 +1,6 @@
 package com.learn.hibrnate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.learn.hibrnate.entity.Course;
+import com.learn.hibrnate.entity.FullTimeEmployee;
+import com.learn.hibrnate.entity.PartTimeEmployee;
 import com.learn.hibrnate.entity.Review;
 import com.learn.hibrnate.entity.Student;
 import com.learn.hibrnate.repository.CourseRepository;
+import com.learn.hibrnate.repository.EmployeeRepository;
 import com.learn.hibrnate.repository.StudentRepository;
 
 @SpringBootApplication
@@ -24,6 +28,9 @@ public class HibrnateApplication implements CommandLineRunner {
 
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -44,8 +51,13 @@ public class HibrnateApplication implements CommandLineRunner {
 
 		//repository.addReviewsForCourse(10003L, reviews);
 		//studentRepository.insertHardcodedStudentAndCourse();
-		studentRepository.insertStudentAndCourse(new Student("Jack"), 
-				new Course("Microservices in 100 Steps"));
+		//studentRepository.insertStudentAndCourse(new Student("Jack"), 
+			//	new Course("Microservices in 100 Steps"));
+		
+		employeeRepository.insert(new PartTimeEmployee("Akhilesh", new BigDecimal("50")));
+		employeeRepository.insert(new FullTimeEmployee("Akhilesh Gupta", new BigDecimal("500")));
+		
+		logger.info("Employee details ->{}",employeeRepository.retriveAllEmployees());
 
 	}
 
