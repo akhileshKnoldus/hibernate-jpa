@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.learn.hibrnate.entity.Employee;
+import com.learn.hibrnate.entity.FullTimeEmployee;
+import com.learn.hibrnate.entity.PartTimeEmployee;
 
 @Repository
 public class EmployeeRepository {
@@ -25,6 +27,14 @@ public class EmployeeRepository {
 	
 	public List<Employee> retriveAllEmployees(){
 		return em.createQuery("select e from Employee e",Employee.class).getResultList();
+	}
+	
+	public List<PartTimeEmployee> retrieveAllPartTimeEmployees() {
+		return em.createQuery("select e from PartTimeEmployee e", PartTimeEmployee.class).getResultList();
+	}
+
+	public List<FullTimeEmployee> retrieveAllFullTimeEmployees() {
+		return em.createQuery("select e from FullTimeEmployee e", FullTimeEmployee.class).getResultList();
 	}
 
 }
